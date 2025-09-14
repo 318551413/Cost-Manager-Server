@@ -6,6 +6,7 @@ const User = require('../models/user');
 const Cost = require('../models/cost');
 const pino = require('pino');
 
+// Create a logger object for event logging
 const logger = pino();
 
 // Endpoint to get a list of all users
@@ -59,6 +60,7 @@ router.get('/:id', function(req, res) {
             res.json(result[0]);
         })
         .catch(function(err) {
+            // Log the error and return a 500 status code for an internal server error.
             logger.error({ error: err.message }, 'Failed to retrieve user details and total costs');
             res.status(500).json({ error: 'Internal server error', details: err.message });
         });
