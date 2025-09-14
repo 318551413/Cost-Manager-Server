@@ -4,11 +4,13 @@ const router = express.Router();
 const User = require('../models/user');
 const Cost = require('../models/cost');
 const pino = require('pino');
-
+// Create a logger instance for logging messages.
 const logger = pino();
 
+// Define the main POST route ("/") to handle incoming requests.
 router.post('/', async (req, res) => {
     try {
+        // Destructure data from the request body.
         const { id, first_name, last_name, birthday, userid, description, sum, category, date } = req.body;
 
         // Validation check and user addition
@@ -18,7 +20,9 @@ router.post('/', async (req, res) => {
                 logger.error(`Failed to add user, ID already exists: ${id}`);
                 return res.status(409).json({ error: 'User ID already exists' });
             }
+            // Create a new User model instance.
             const newUser = new User({ id, first_name, last_name, birthday });
+            // Save the new user to the database.
             await newUser.save();
             logger.info(`User added successfully: ${id}`);
             return res.status(201).json(newUser);
@@ -45,7 +49,7 @@ router.post('/', async (req, res) => {
                 logger.warn(`Attempt to add cost in the past: ${costDate}`);
                 return res.status(400).json({ error: 'Cannot add a cost for a past date' });
             }
-
+            // Create a new Cost model instance.
             const newCost = new Cost({
                 userid,
                 description,
@@ -53,7 +57,7 @@ router.post('/', async (req, res) => {
                 category,
                 date: costDate
             });
-
+            // Save the new cost to the database.
             await newCost.save();
             logger.info(`Cost added successfully for user: ${userid}`);
             return res.status(201).json(newCost);
