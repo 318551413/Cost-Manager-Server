@@ -1,3 +1,4 @@
+
 //app.js This file sets up and configures the main Express server application.
 const express = require('express');
 // Mongoose is an ODM (Object Data Modeling) library for MongoDB and Node.js.
@@ -36,7 +37,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // --- Route Imports ---
 // Import all route handlers from the 'routes' directory.
-const costsRouter = require('./routes/costs');
+const reportRouter = require('./routes/report');
 const usersRouter = require('./routes/users');
 const aboutRouter = require('./routes/about');
 const logsRouter = require('./routes/logs');
@@ -45,7 +46,7 @@ const addRouter = require('./routes/add');
 // Connect each router to its specific base path in the application.
 app.use('/api/add', addRouter);
 app.use('/api/users', usersRouter);
-app.use('/api/report', costsRouter);
+app.use('/api/report', reportRouter);
 app.use('/api/about', aboutRouter);
 app.use('/api/logs', logsRouter);
 
