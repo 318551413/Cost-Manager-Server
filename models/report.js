@@ -1,4 +1,4 @@
-// קובץ: models/report.js (updated)
+// models/report.js
 const mongoose = require('mongoose');
 // Define the Report schema for the Computed Design Pattern
 const reportSchema = new mongoose.Schema({
