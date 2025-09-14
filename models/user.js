@@ -1,5 +1,5 @@
+// This file defines the Mongoose schema and model for a 'User'.
 const mongoose = require('mongoose');
-
 // Define the users schema
 const userSchema = new mongoose.Schema({
     id: {
